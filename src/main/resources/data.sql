@@ -1,2 +1,11 @@
-INSERT INTO MESSAGE (content) VALUES ('Mi mensaje #Oracle');
-INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Oracle', 1);
+INSERT INTO MESSAGE (content,user_name) VALUES ('My message #Oracle', '@agarella');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Spring & Java in #Oracle', '@javaDeveloper');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Kafka topics rule #Kafka', '@loveProgramming');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Mentoring & learning #TeamOracle', '@spingbootUser');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Databases and cloud framework #Oracle', '@javaDeveloper');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Using oracle jet tools #Oracle', '@agarella');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Testing new technologies #Oracle #Kafka', '@loveProgramming');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Springboot 2.0 tutorial #TeamOracle', '@spingbootUser');
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Oracle', 5);
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Kafka', 2);
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#TeamOracle', 1);

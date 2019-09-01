@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Long> {
     Message findByContent(String message);
+    Iterable<Message> findAllByOrderByIdDesc();
 }
