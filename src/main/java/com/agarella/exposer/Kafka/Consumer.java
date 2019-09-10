@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.stream.StreamSupport;
 
 @Service
 public class Consumer {
@@ -41,6 +40,7 @@ public class Consumer {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         //Build dummy message
+        //TODO: Create new structure for notification messages
         Message msg = Message.builder()
                 .content(message)
                 .id(0)
@@ -53,7 +53,7 @@ public class Consumer {
                 String jsonStr = Obj.writeValueAsString(msg);
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 String resourceUrl
-                        = "http://localhost:3000/api/kafka/new";
+                        = "http://localhost:3000/api/kafka/new"; //TODO: Change to dynamic URL
                 HttpEntity<String> request = new HttpEntity<String>(jsonStr, headers);
 
                 ResponseEntity<String> response
@@ -66,6 +66,10 @@ public class Consumer {
 
 
     }
+    /**
+     * @param msg - contains the String message value
+     * @return a list of string that represent the tags
+     **/
     private List<String> parseValue (String msg){
         String[] results = msg.split(" ");
         List<String> listResults = Arrays.asList(results);
@@ -77,6 +81,12 @@ public class Consumer {
         logger.info("Size of hashtag list {}", listResults.size());
         return listResults;
     }
+
+    /**
+     *
+     * @param initialList - List of strings that contain all the tags
+     * @return list of strings that contain the tags that already exists on the database
+     */
     private List<String> getRepeated (List<String> initialList){
         Iterable<GroupMessage> allGroups = this.groupRepository.findAll();
         List<String> finalResults = new ArrayList<String>();
@@ -97,6 +107,13 @@ public class Consumer {
         }
         return finalResults;
     }
+
+    /**
+     *
+     * @param resultsRepeated - tags that are repeated
+     * @param newResults - new tags to coming on the message
+     * @return true/false if there were new tags
+     */
     private boolean populateGroups (List<String> resultsRepeated, List<String> newResults){
         boolean hasNew = false;
         for(String repeated : resultsRepeated) {

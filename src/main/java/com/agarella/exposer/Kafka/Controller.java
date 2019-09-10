@@ -42,7 +42,7 @@ public class Controller {
             String jsonStr = Obj.writeValueAsString(msg);
             headers.setContentType(MediaType.APPLICATION_JSON);
             String resourceUrl
-                    = "http://localhost:3000/api/kafka/send";
+                    = "http://localhost:3000/api/kafka/send";//TODO: Change to dynamic URL
             HttpEntity<String> request = new HttpEntity<String>(jsonStr, headers);
 
             ResponseEntity<String> response
@@ -55,7 +55,7 @@ public class Controller {
 
     }
     @RequestMapping(value = "messages", method = RequestMethod.GET)
-    public List<Message> getAllMessages() {
+    public List<Message> getAllMessages() { //TODO: Add parameter to search all messages that contain a tag
         List<Message> messages = new ArrayList<>();
         Iterable<Message> results = this.msgRepository.findAllByOrderByIdDesc();
         results.forEach(message-> {messages.add(message);});

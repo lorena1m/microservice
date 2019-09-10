@@ -10,7 +10,7 @@ public class Sender {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    String kafkaTopic = "java_in_use_topic";
+    String kafkaTopic = "java_in_use_topic"; //Should match the one on the Consumer class
     private final Logger logger = LoggerFactory.getLogger(Sender.class);
     public void send(String message) {
 
