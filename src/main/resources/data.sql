@@ -6,6 +6,10 @@ INSERT INTO MESSAGE (content,user_name) VALUES ('Databases and cloud framework #
 INSERT INTO MESSAGE (content,user_name) VALUES ('Using oracle jet tools #Oracle', '@agarella');
 INSERT INTO MESSAGE (content,user_name) VALUES ('Testing new technologies #Oracle #Kafka', '@loveProgramming');
 INSERT INTO MESSAGE (content,user_name) VALUES ('Springboot 2.0 tutorial #TeamOracle', '@spingbootUser');
-INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Oracle', 5);
-INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Kafka', 2);
-INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#TeamOracle', 1);
+INSERT INTO MESSAGE (content,user_name) VALUES ('We are on our way to the university #TeamOracle', '@oracleUniversity');
+INSERT INTO MESSAGE (content,user_name) VALUES ('This new version of #Kafka rules!', '@kafkaLover');
+INSERT INTO MESSAGE (content,user_name) VALUES ('Using oracle jet now! #Oracle #OJet', '@loveProgramming');
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Oracle', 6);
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#Kafka', 3);
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#TeamOracle', 3);
+INSERT INTO GROUP_MESSAGE (name_group,total_per_group) VALUES ('#OJet', 1);
