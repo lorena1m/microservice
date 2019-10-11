@@ -61,6 +61,7 @@ public class Controller {
         results.forEach(message-> {messages.add(message);});
         return messages;
     }
+    //Test comment
     @RequestMapping(value = "groups/getAll", method = RequestMethod.GET)
     public List<GroupMessage> getAllGroups(@RequestParam(value = "group", required = false) String groupName) {
         List<GroupMessage> groups = new ArrayList<>();
