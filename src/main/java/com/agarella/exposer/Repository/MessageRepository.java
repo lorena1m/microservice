@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface MessageRepository extends CrudRepository<Message, Long> {
     Message findByContent(String message);
     Iterable<Message> findAllByOrderByIdDesc();
+    Iterable<Message> findAllByContentIgnoreCaseContainingOrderByIdDesc(String tag);
+    Iterable<Message> findAllByUserEqualsOrderByIdDesc(String user);
 }

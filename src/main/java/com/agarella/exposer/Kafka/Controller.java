@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import com.agarella.exposer.Kafka.Sender;
 import com.agarella.exposer.Repository.GroupMessageRepository;
 import com.agarella.exposer.Repository.MessageRepository;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +26,7 @@ public class Controller {
     @RequestMapping(value = "message", method = RequestMethod.POST)
     public ResponseEntity producer(@RequestParam("value") String message,
                                    @RequestParam("user") String user) {
+        // Send message so the rest of the logic can execute
         kafkaSender.send(message);
         Message msg = Message.builder()
                 .content(message)
@@ -36,7 +36,7 @@ public class Controller {
         //Start HTTP Request
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-
+        //Sends object to node notification server
         ObjectMapper Obj = new ObjectMapper();
         try {
             String jsonStr = Obj.writeValueAsString(msg);
@@ -55,10 +55,19 @@ public class Controller {
 
     }
     @RequestMapping(value = "messages", method = RequestMethod.GET)
-    public List<Message> getAllMessages() { //TODO: Add parameter to search all messages that contain a tag
+    public List<Message> getAllMessages(@RequestParam(value = "tag", required = false) String tag,
+                                        @RequestParam(value = "user", required = false) String username) {
         List<Message> messages = new ArrayList<>();
-        Iterable<Message> results = this.msgRepository.findAllByOrderByIdDesc();
+        Iterable<Message> results;
+        if (tag != null){
+            results = this.msgRepository.findAllByContentIgnoreCaseContainingOrderByIdDesc(tag);
+        } else if(username != null){
+            results =this.msgRepository.findAllByUserEqualsOrderByIdDesc(username);
+        } else {
+            results = this.msgRepository.findAllByOrderByIdDesc();
+        }
         results.forEach(message-> {messages.add(message);});
+
         return messages;
     }
     @RequestMapping(value = "groups/getAll", method = RequestMethod.GET)
