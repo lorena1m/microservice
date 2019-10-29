@@ -13,8 +13,5 @@ public class Sender {
     String kafkaTopic = "java_in_use_topic"; //Should match the one on the Consumer class
     private final Logger logger = LoggerFactory.getLogger(Sender.class);
     public void send(String message) {
-
-        kafkaTemplate.send(kafkaTopic, message);
-        logger.info(String.format("$$ -> Sending -> %s",message));
     }
 }
