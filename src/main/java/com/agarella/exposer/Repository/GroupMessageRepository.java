@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface GroupMessageRepository extends CrudRepository<GroupMessage, Long> {
     GroupMessage findByGroup(String name);
+    
     Iterable<GroupMessage> findTop5ByOrderByTotalDesc();
     List<GroupMessage> findByGroupIgnoreCaseContaining(String group);
 }
